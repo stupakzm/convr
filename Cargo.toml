@@ -1,6 +1,43 @@
 [package]
 name = "convr"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
+description = "Universal local file converter"
+
+[[bin]]
+name = "convr"
+path = "src/main.rs"
 
 [dependencies]
+# CLI
+clap = { version = "4", features = ["derive"] }
+anyhow = "1"
+indicatif = "0.17"
+rayon = "1"
+glob = "0.3"
+infer = "0.16"
+
+# Data formats
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+toml = { version = "0.8", features = ["parse", "display"] }
+csv = "1"
+quick-xml = { version = "0.36", features = ["serialize"] }
+
+# Documents
+pulldown-cmark = "0.12"
+
+# Images (pure Rust)
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif", "webp", "tiff", "bmp", "ico", "rayon"] }
+resvg = "0.44"
+tiny-skia = "0.11"
+oxipng = { version = "9", default-features = false, features = ["parallel", "zopfli", "filetime"] }
+ravif = { version = "0.11", default-features = false, features = ["threading"] }
+rgb = "0.8"
+
+[features]
+default = []
+vips = []    # libvips — extended image format support
+mupdf = []   # MuPDF — full PDF read/write/render
+heif = []    # libheif — HEIC/HEIF support
