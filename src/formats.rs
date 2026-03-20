@@ -1,7 +1,7 @@
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum Format {
     // Images
-    Png, Jpeg, Webp, Avif, Gif, Bmp, Tiff, Ico, Svg,
+    Png, Jpeg, Webp, Avif, Gif, Bmp, Tiff, Ico, Svg, Heif,
     // Documents
     Markdown, Html, Pdf, PlainText,
     // Data
@@ -27,6 +27,7 @@ impl Format {
             "tiff" | "tif"  => Self::Tiff,
             "ico"            => Self::Ico,
             "svg"            => Self::Svg,
+            "heic" | "heif"  => Self::Heif,
             "md" | "markdown" => Self::Markdown,
             "html" | "htm"   => Self::Html,
             "pdf"            => Self::Pdf,
@@ -55,6 +56,7 @@ impl Format {
             Self::Tiff      => "tiff",
             Self::Ico       => "ico",
             Self::Svg       => "svg",
+            Self::Heif      => "heic",
             Self::Markdown  => "md",
             Self::Html      => "html",
             Self::Pdf       => "pdf",
@@ -70,7 +72,7 @@ impl Format {
     pub fn category(&self) -> Category {
         match self {
             Self::Png | Self::Jpeg | Self::Webp | Self::Avif | Self::Gif
-            | Self::Bmp | Self::Tiff | Self::Ico | Self::Svg => Category::Image,
+            | Self::Bmp | Self::Tiff | Self::Ico | Self::Svg | Self::Heif => Category::Image,
             Self::Markdown | Self::Html | Self::Pdf | Self::PlainText => Category::Document,
             Self::Json | Self::Yaml | Self::Toml | Self::Csv | Self::Xml => Category::Data,
         }

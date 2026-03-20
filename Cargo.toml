@@ -36,8 +36,13 @@ oxipng = { version = "9", default-features = false, features = ["parallel", "zop
 ravif = { version = "0.11", default-features = false, features = ["threading"] }
 rgb = "0.8"
 
+# C library backends (optional)
+libheif-rs = { version = "2.7", optional = true, features = ["embedded-libheif"] }
+libvips = { version = "1.7", optional = true }
+mupdf = { version = "0.6", optional = true }
+
 [features]
 default = []
-vips = []    # libvips — extended image format support
-mupdf = []   # MuPDF — full PDF read/write/render
-heif = []    # libheif — HEIC/HEIF support
+heif = ["dep:libheif-rs"]
+vips = ["dep:libvips"]
+mupdf-backend = ["dep:mupdf"]

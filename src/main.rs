@@ -1,3 +1,4 @@
+mod backends;
 mod batch;
 mod convert;
 mod detect;
@@ -6,6 +7,8 @@ mod converters {
     pub mod data;
     pub mod document;
     pub mod image;
+    #[cfg(feature = "heif")]
+    pub mod image_heif;
 }
 
 use anyhow::Result;
