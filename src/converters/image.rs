@@ -58,10 +58,18 @@ pub fn convert(input: &Path, src: &Format, output: &Path, target: &Format) -> Re
         return Ok(());
     }
 
-    // All other raster ↔ raster: delegate to the `image` crate
-    let img = image::open(input)?;
-    img.save(output)?;
-    Ok(())
+    // All other raster ↔ raster
+    #[cfg(feature = "vips")]
+    {
+        super::image_vips::convert_via_vips(input, output)?;
+        return Ok(());
+    }
+    #[cfg(not(feature = "vips"))]
+    {
+        let img = image::open(input)?;
+        img.save(output)?;
+        return Ok(());
+    }
 }
 
 fn svg_to_raster(input: &Path, output: &Path, target: &Format) -> Result<()> {

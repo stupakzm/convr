@@ -21,3 +21,20 @@ pub fn available_backends() -> Vec<BackendInfo> {
         },
     ]
 }
+
+#[cfg(feature = "vips")]
+mod vips_init {
+    use libvips::VipsApp;
+    use std::sync::OnceLock;
+
+    static VIPS: OnceLock<VipsApp> = OnceLock::new();
+
+    pub fn vips_app() -> &'static VipsApp {
+        VIPS.get_or_init(|| {
+            VipsApp::new("convr", false).expect("libvips initialization failed")
+        })
+    }
+}
+
+#[cfg(feature = "vips")]
+pub use vips_init::vips_app;

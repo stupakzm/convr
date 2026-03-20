@@ -9,6 +9,10 @@ mod converters {
     pub mod image;
     #[cfg(feature = "heif")]
     pub mod image_heif;
+    #[cfg(feature = "vips")]
+    pub mod image_vips;
+    #[cfg(feature = "mupdf-backend")]
+    pub mod document_pdf;
 }
 
 use anyhow::Result;

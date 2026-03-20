@@ -8,6 +8,38 @@ pub fn convert(input: &Path, src: &Format, output: &Path, target: &Format) -> Re
         (Format::Html, Format::PlainText) => html_to_text(input, output),
         (Format::Markdown, Format::PlainText) => md_to_text(input, output),
         (Format::PlainText, Format::Html) => text_to_html(input, output),
+
+        // PDF source — use MuPDF for rendering
+        (Format::Pdf, Format::Png) | (Format::Pdf, Format::Jpeg) => {
+            #[cfg(feature = "mupdf-backend")]
+            {
+                let tmp_png = output.with_extension("_mupdf_tmp.png");
+                super::document_pdf::render_page_to_png(input, 0, 150.0, &tmp_png)?;
+                if *target == Format::Png {
+                    std::fs::rename(&tmp_png, output)?;
+                } else {
+                    let img = image::open(&tmp_png)?;
+                    img.save(output)?;
+                    std::fs::remove_file(&tmp_png)?;
+                }
+                Ok(())
+            }
+            #[cfg(not(feature = "mupdf-backend"))]
+            anyhow::bail!("PDF rendering requires building with --features mupdf-backend")
+        }
+
+        // PDF pass-through (validate readability, then copy)
+        (Format::Pdf, Format::Pdf) => {
+            #[cfg(feature = "mupdf-backend")]
+            {
+                let _count = super::document_pdf::pdf_page_count(input)?;
+                std::fs::copy(input, output)?;
+                Ok(())
+            }
+            #[cfg(not(feature = "mupdf-backend"))]
+            anyhow::bail!("PDF operations require building with --features mupdf-backend")
+        }
+
         (src, target) => bail!("Document conversion {:?} → {:?} not yet supported", src, target),
     }
 }
