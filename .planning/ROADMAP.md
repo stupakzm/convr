@@ -28,7 +28,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. `convr` binary links libvips statically and raster operations route through it when the vips feature is enabled
   3. `convr` binary links MuPDF statically and can open, render, and write a PDF document when the mupdf feature is enabled
   4. All three features can be enabled simultaneously in a single build with no link conflicts
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Wire Cargo deps, extend Format enum, implement libheif HEIF decode backend
+- [ ] 01-02-PLAN.md — Implement libvips and MuPDF backends, all-features integration test
 
 ### Phase 2: Document Conversion
 **Goal**: Users can convert between DOCX, EPUB, Markdown, HTML, and PDF in both directions
@@ -73,7 +77,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. C Library Backends | 0/TBD | Not started | - |
+| 1. C Library Backends | 0/2 | Planning complete | - |
 | 2. Document Conversion | 0/TBD | Not started | - |
 | 3. Image Format Coverage | 0/TBD | Not started | - |
 | 4. UX and Distribution | 0/TBD | Not started | - |
