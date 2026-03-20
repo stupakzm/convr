@@ -4,10 +4,21 @@
   "parallelization": true,
   "commit_docs": true,
   "model_profile": "balanced",
+  "model_overrides": {
+    "gsd-executor": "ollama:qwen2.5-coder:32b",
+    "gsd-codebase-mapper": "ollama:qwen2.5-coder:7b",
+    "gsd-research-synthesizer": "ollama:qwen2.5-coder:14b",
+    "gsd-verifier": "ollama:qwen2.5-coder:32b",
+    "gsd-plan-checker": "ollama:qwen2.5-coder:32b",
+    "gsd-debugger": "ollama:qwen2.5-coder:32b",
+    "gsd-integration-checker": "ollama:qwen2.5-coder:32b",
+    "gsd-nyquist-auditor": "ollama:qwen2.5-coder:14b"
+  },
   "workflow": {
     "research": true,
     "plan_check": true,
     "verifier": true,
-    "nyquist_validation": true
+    "nyquist_validation": true,
+    "_auto_chain_active": false
   }
 }
