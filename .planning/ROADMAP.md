@@ -31,8 +31,8 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans:** 2 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Wire Cargo deps, extend Format enum, implement libheif HEIF decode backend
-- [ ] 01-02-PLAN.md — Implement libvips and MuPDF backends, all-features integration test
+- [x] 01-01-PLAN.md — Wire Cargo deps, extend Format enum, implement libheif HEIF decode backend
+- [x] 01-02-PLAN.md — Implement libvips and MuPDF backends, all-features integration test
 
 ### Phase 2: Document Conversion
 **Goal**: Users can convert between DOCX, EPUB, Markdown, HTML, and PDF in both directions
