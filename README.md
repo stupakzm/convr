@@ -75,3 +75,7 @@ cargo build --release
 ```
 
 Binary will be at `target/release/convr`.
+
+## License
+
+MIT License - See LICENSE file for details
